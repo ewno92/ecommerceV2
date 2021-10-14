@@ -3,7 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useState, useContext, useEffect } from "react";
 import valid from "../utils/valid";
-import { postData } from "../utils/fetchData";
+import { postData, signin } from "../utils/fetchData";
 import { useRouter } from "next/router";
 import { connect } from "mongoose";
 //Reducer
@@ -43,16 +43,15 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const errMsg = valid(name, email, password, cf_password);
     console.log(errMsg);
     if (errMsg) {
       // setValues({ ...values, error: errMsg, loading: "" });
-      console.log(`errMsg: ${errMsg}`);
+      // console.log(`errMsg: ${errMsg}`);
       return dispatch({ type: "NOTIFY", payload: { error: errMsg } });
     } else {
       // console.log(`${baseUrl}`);
-      const res = await postData("auth/register", userData);
+      const res = await signin("auth/register", userData);
       if (res.err) return setValues({ ...values, error: res.err });
     }
     setValues({ ...values, loading: true });

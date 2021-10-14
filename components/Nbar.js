@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import Link from "next/link";
+import { signOut, isAuth } from "../actions/auth";
 
 const Nbar = () => {
   return (
@@ -24,7 +25,9 @@ const Nbar = () => {
             </Nav.Link>
             <NavDropdown title="User" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Logout</NavDropdown.Item>
+              <NavDropdown.Item>
+                <p onClick={signOut}>Logout</p>
+              </NavDropdown.Item>
               {/* <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
                 Separated link

@@ -2,10 +2,11 @@ import Head from "next/head";
 import Link from "next/link";
 import { useState, useContext, useEffect } from "react";
 import { DataContext } from "../store/GlobalState";
-import { postData } from "../utils/fetchData";
-import Cookie from "js-cookie";
+import { postData, signin } from "../utils/fetchData";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
+import { authenticate } from "../actions/auth";
 const Signin = () => {
   const initialState = { email: "", password: "" };
   const [userData, setUserData] = useState(initialState);
@@ -24,14 +25,14 @@ const Signin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(userData);
     // dispatch({ type: "NOTIFY", payload: { loading: true } });
-    const res = await postData("auth/login", userData);
+    const res = await signin("auth/login", userData);
 
     if (res.err)
       return dispatch({ type: "NOTIFY", payload: { error: res.err } });
     dispatch({ type: "NOTIFY", payload: { success: res.msg } });
 
+    authenticate(userData, () => {});
     dispatch({
       type: "AUTH",
       payload: {
