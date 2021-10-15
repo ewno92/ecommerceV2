@@ -32,35 +32,14 @@ const Signin = () => {
 
     dispatch({ type: "NOTIFY", payload: { success: res.msg } });
 
-    // dispatch({
-    //   type: "AUTH",
-    //   payload: {
-    //     success: res.msg,
-    //   },
-    // });
-
-    console.log(res);
-
     dispatch({
       type: "AUTH",
-      payload: { toke: res.access_token, user: res.user },
+      payload: { token: res.access_token, user: res.user },
     });
 
-    console.log(res);
-    authenticate(res, () => {
-      if (isAuth() && isAuth().role == 1) {
-        router.push(`/`);
-      } else {
-        router.push(`/user`);
-      }
-    });
-
-    // Cookie.set("refreshtoken", res.refresh_token, {
-    //   path: "api/auth/accessToken",
-    //   expires: 7,
-    // });
-
-    localStorage.setItem("firstLogin", true);
+    // console.log(res);
+    authenticate(res);
+    router.push(`/`);
   };
 
   // useEffect(() => {

@@ -9,21 +9,21 @@ const Notify = () => {
 
   return (
     <>
-      {/* {notify.loading && <Loading />} */}
+      {notify.loading && <Loading />}
       {notify.error && (
         <Toast
           msg={{ msg: notify.error, title: "Error" }}
           handleShow={() => dispatch({ type: "NOTIFY", payload: {} })}
         />
       )}
-      {/* {notify.success && (
+      {notify.success && (
         <Toast
           msg={{ msg: notify.sucess, title: "success" }}
           handleShow={() => dispatch({ type: "NOTIFY", payload: {} })}
         />
-      )} */}
-      {/* {notify.loading && <Loading />} */}
-      {/* {notify.error && (
+      )}
+      {notify.loading && <Loading />}
+      {notify.error && (
         <Toast
           msg={{ msg: notify.error, title: "Error" }}
           handleShow={() => dispatch({ type: "NOTIFY", payload: {} })}
@@ -37,7 +37,7 @@ const Notify = () => {
           handleShow={() => dispatch({ type: "NOTIFY", payload: {} })}
           bgColor="bg-success"
         />
-      )} */}
+      )}
     </>
   );
 };

@@ -37,19 +37,18 @@ export const removeLocalStorage = (key) => {
 // authenticate user by pass data to cookie and localstorage
 
 export const authenticate = (data) => {
-  setCookie("access_token", data.access_token);
-  // setCookie("refresh_token", data.refresh_token);
   setCookie("refreshtoken", data.refresh_token, {
     path: "api/auth/accessToken",
+    expires: 7,
   });
 
+  localStorage.setItem("firstLogin", true);
   setLocalStorage("user", data.user);
-  // next();
 };
 
 export const isAuth = () => {
   if (process.browser) {
-    const cookieChecked = getCookie("access_token");
+    const cookieChecked = getCookie("refreshtoken");
     if (cookieChecked) {
       if (localStorage.getItem("user")) {
         return JSON.parse(localStorage.getItem("user"));

@@ -1,7 +1,7 @@
 module.exports = {
   reactStrictMode: true,
   env: {
-    ABC: process.env.ABC,
+    APP_NAME: process.env.APP_NAME,
     MONGO_URL: process.env.MONGO_URL,
     BASE_URL: process.env.BASE_URL,
     ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET,
