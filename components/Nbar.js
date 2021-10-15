@@ -1,8 +1,8 @@
 import React from "react";
-import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
+import { Container, Nav, NavDropdown, Navbar, NavLink } from "react-bootstrap";
 import Link from "next/link";
-import { signOut, isAuth } from "../actions/auth";
-
+import { isAuth } from "../actions/auth";
+import { signOut } from "../utils/fetchData";
 const Nbar = () => {
   return (
     <Navbar bg="light" expand="lg">
@@ -23,10 +23,17 @@ const Nbar = () => {
             <Nav.Link href="/signin">
               <i className="bi bi-person-circle"></i> Signin
             </Nav.Link>
+            {isAuth() && (
+              <Nav href="/signin">
+                <NavLink onClick={() => signOut(() => Router.push(`/`))}>
+                  <i className="bi bi-person-circle"></i> Sign out
+                </NavLink>
+              </Nav>
+            )}
             <NavDropdown title="User" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
               <NavDropdown.Item>
-                <p onClick={signOut}>Logout</p>
+                {/* <p onClick={signOut}>Logout</p> */}
               </NavDropdown.Item>
               {/* <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">

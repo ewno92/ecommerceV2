@@ -8,6 +8,8 @@ export const ACTIONS = {
   // ADD_CATEGORIES: "ADD_CATEGORIES",
 };
 
+export default ACTIONS;
+
 // export const addToCart = (product, cart) => {
 //   if (product.inStock === 0)
 //     return {

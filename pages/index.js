@@ -11,6 +11,7 @@ export default function Home() {
         <i className="fas fa-user"></i>
       </a>
       hi
+      <button onClick={isAuth}>bucc</button>
       {/* <Toast msg="hello" /> */}
       {/* <button onClick={console.log("hi", process.env.MONGO_URL)}>Auth</button> */}
     </div>

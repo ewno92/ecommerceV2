@@ -4,18 +4,17 @@ import { useState, useContext, useEffect } from "react";
 import { DataContext } from "../store/GlobalState";
 import { postData, signin } from "../utils/fetchData";
 import { useRouter } from "next/router";
-import Cookies from "js-cookie";
+import Cookie from "js-cookie";
 
-import { authenticate } from "../actions/auth";
+import { authenticate, isAuth } from "../actions/auth";
 const Signin = () => {
+  const router = useRouter();
   const initialState = { email: "", password: "" };
   const [userData, setUserData] = useState(initialState);
   const { email, password } = userData;
 
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
-
-  const router = useRouter();
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -25,33 +24,48 @@ const Signin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // dispatch({ type: "NOTIFY", payload: { loading: true } });
+    dispatch({ type: "NOTIFY", payload: { loading: true } });
     const res = await signin("auth/login", userData);
 
     if (res.err)
       return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+
     dispatch({ type: "NOTIFY", payload: { success: res.msg } });
 
-    authenticate(userData, () => {});
+    // dispatch({
+    //   type: "AUTH",
+    //   payload: {
+    //     success: res.msg,
+    //   },
+    // });
+
+    console.log(res);
+
     dispatch({
       type: "AUTH",
-      payload: {
-        token: res.access_token,
-        user: res.user,
-      },
+      payload: { toke: res.access_token, user: res.user },
     });
 
-    Cookie.set("refreshtoken", res.refresh_token, {
-      path: "api/auth/accessToken",
-      expires: 7,
+    console.log(res);
+    authenticate(res, () => {
+      if (isAuth() && isAuth().role == 1) {
+        router.push(`/`);
+      } else {
+        router.push(`/user`);
+      }
     });
+
+    // Cookie.set("refreshtoken", res.refresh_token, {
+    //   path: "api/auth/accessToken",
+    //   expires: 7,
+    // });
 
     localStorage.setItem("firstLogin", true);
   };
 
-  useEffect(() => {
-    if (Object.keys(auth).length !== 0) router.push("/");
-  }, [auth]);
+  // useEffect(() => {
+  //   if (Object.keys(auth).length !== 0) router.push("/");
+  // }, [auth]);
 
   return (
     <div>

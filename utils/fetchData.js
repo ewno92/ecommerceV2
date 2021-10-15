@@ -58,6 +58,18 @@ export const signin = async (url, post, token) => {
   return data;
 };
 
+export const signOut = async (url, token) => {
+  const res = await fetch(`${baseUrl}/api/signout`, {
+    method: "GET",
+    headers: {
+      Authorization: token,
+    },
+  });
+
+  const data = await res.json();
+  return data;
+};
+
 export const putData = async (url, post, token) => {
   const res = await fetch(`${baseUrl}/api/${url}`, {
     method: "PUT",
