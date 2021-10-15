@@ -2,14 +2,17 @@ import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Layout from "../components/Layout";
 import { DataProvider } from "../store/GlobalState";
+import { SSRProvider } from "@react-aria/ssr";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <DataProvider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </DataProvider>
+    <SSRProvider>
+      <DataProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </DataProvider>
+    </SSRProvider>
   );
 }
 

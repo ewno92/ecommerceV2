@@ -6,7 +6,7 @@
 //     return;
 //   }
 //   mongoose.connect(
-//     process.env.MONGODB_URL,
+//     process.env.MONGO_URL,
 //     {
 //       useCreateIndex: true,
 //       useFindAndModify: false,
@@ -29,13 +29,14 @@ async function dbConnect() {
   if (connection.isConnected) {
     return;
   }
+
   const db = await mongoose.connect(process.env.MONGO_URL, {
     // useCreateIndex: true,
     // useFindAndModify: false,
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  connection.isConnected = db.connection[0].readyState;
-  console.log(connection.isConnected);
+  connection.isConnected = db.connection.readyState;
+  console.log("******************database connected******************");
 }
 export default dbConnect;

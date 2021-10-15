@@ -1,28 +1,40 @@
-import Toast from "../components/Toast";
-import { isAuth } from "../utils/fetchData";
-export default function Home() {
-  const errMsg = "error";
+// import { isAuth } from "../utils/fetchData";
+import { getData } from "../utils/fetchData";
+import { useState } from "react";
+import Head from "next/head";
+import ProductItem from "../components/product/ProductItem";
+
+export default function Home(props) {
+  const [products, setProducts] = useState(props.products);
+
+  // console.log(products);
+  // console.log(props.result);
+
   return (
     <div>
-      hello
-      <i className="bi bi-suit-club-fill"></i>
-      <i className="fas fa-user"></i>
-      <a>
-        <i className="fas fa-user"></i>
-      </a>
-      hi
-      <button onClick={isAuth}>bucc</button>
-      {/* <Toast msg="hello" /> */}
-      {/* <button onClick={console.log("hi", process.env.MONGO_URL)}>Auth</button> */}
+      <Head>
+        <title>Home Page</title>
+      </Head>
+
+      {products.length === 0 ? (
+        <h2>No Products</h2>
+      ) : (
+        products.map((product) => (
+          <ProductItem key={product._id} product={product} />
+        ))
+      )}
     </div>
   );
 }
 
 export async function getServerSideProps() {
-  console.log(process.env.JWT_SECRET);
+  const res = await getData("product");
+  // server side rendering
+  // console.log(res);
   return {
     props: {
-      hello: "world",
-    },
+      products: res.products,
+      result: res.result,
+    }, // will be passed to the page component as props
   };
 }
