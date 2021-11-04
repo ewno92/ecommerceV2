@@ -1,10 +1,10 @@
 import React from "react";
-import Nbar from "./Nbar";
+import Navbar from "./Navbar";
 import Notify from "./Notify";
 const Layout = ({ children }) => {
   return (
     <div>
-      <Nbar />
+      <Navbar />
       <Notify />
       {children}
     </div>

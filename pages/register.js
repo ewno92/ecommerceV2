@@ -44,28 +44,20 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    dispatch({ type: "NOTIFY", payload: { loading: true } });
-
     const errMsg = valid(name, email, password, cf_password);
     console.log(errMsg);
     if (errMsg) {
-      // setValues({ ...values, error: errMsg, loading: "" });
-      // console.log(`errMsg: ${errMsg}`);
-      return dispatch({ type: "NOTIFY", payload: { error: errMsg } });
+      return setValues({ ...values, error: errMsg });
     } else {
-      // console.log(`${baseUrl}`);
       const res = await signin("auth/register", userData);
       if (res.err) {
-        dispatch({ type: "NOTIFY", payload: { error: errMsg } });
         return setValues({ ...values, error: res.err });
       }
     }
-    setValues({ ...values, loading: true });
     dispatch({
       type: "NOTIFY",
-      payload: { error: "Register Success!" },
+      payload: { success: "Register Success!" },
     });
-    return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
     router.push("/signin");
   };
 
