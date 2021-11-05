@@ -1,16 +1,15 @@
 import Head from "next/head";
 import { useState, useContext } from "react";
 import { getData } from "../../utils/fetchData";
-// import { DataContext } from "../../store/GlobalState";
+import { DataContext } from "../../store/GlobalState";
 import { addToCart } from "../../store/Actions";
 
 const DetailProduct = (props) => {
   const [product] = useState(props.product);
-  // console.log("res", product);
   const [tab, setTab] = useState(0);
 
-  // const { state, dispatch } = useContext(DataContext);
-  // const { cart } = state;
+  const { state, dispatch } = useContext(DataContext);
+  const { cart } = state;
 
   const isActive = (index) => {
     if (tab === index) return " active";
@@ -67,7 +66,7 @@ const DetailProduct = (props) => {
           className="btn btn-dark d-block my-3 px-5"
           onClick={() => dispatch(addToCart(product, cart))}
         >
-          Buy
+          Add to Cart
         </button>
       </div>
     </div>
@@ -78,7 +77,7 @@ export async function getServerSideProps({ params: { id } }) {
   const res = await getData(`product/${id}`);
   // server side rendering
   return {
-    props: { product: res.product }, // will be passed to the page component as props
+    props: { product: res.product },
   };
 }
 

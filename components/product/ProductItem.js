@@ -19,7 +19,7 @@ const ProductItem = ({ product }) => {
           disabled={product.inStock === 0 ? true : false}
           onClick={() => dispatch(addToCart(product, cart))}
         >
-          Buy
+          Add to Cart
         </button>
       </>
     );

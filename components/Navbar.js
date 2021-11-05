@@ -25,7 +25,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <Link href="/">
-          <a className="navbar-brand">Navbar</a>
+          <a className="navbar-brand">{process.env.APP_NAME}</a>
         </Link>
         <button
           className="navbar-toggler"
