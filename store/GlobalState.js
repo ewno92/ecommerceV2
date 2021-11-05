@@ -9,7 +9,7 @@ export const DataProvider = ({ children }) => {
     notify: {},
     auth: {},
     cart: [],
-    // modal: [],
+    modal: [],
     // orders: [],
     // users: [],
     // categories: [],
@@ -53,28 +53,28 @@ export const DataProvider = ({ children }) => {
     localStorage.setItem("__next__cart01", JSON.stringify(cart));
   }, [cart]);
 
-  // useEffect(() => {
-  //   if (auth.token) {
-  //     getData("order", auth.token).then((res) => {
-  //       if (res.err)
-  //         return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+  useEffect(() => {
+    if (auth.token) {
+      getData("order", auth.token).then((res) => {
+        if (res.err)
+          return dispatch({ type: "NOTIFY", payload: { error: res.err } });
 
-  //       dispatch({ type: "ADD_ORDERS", payload: res.orders });
-  //     });
+        dispatch({ type: "ADD_ORDERS", payload: res.orders });
+      });
 
-  //     if (auth.user.role === "admin") {
-  //       getData("user", auth.token).then((res) => {
-  //         if (res.err)
-  //           return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+      if (auth.user.role === "admin") {
+        getData("user", auth.token).then((res) => {
+          if (res.err)
+            return dispatch({ type: "NOTIFY", payload: { error: res.err } });
 
-  //         dispatch({ type: "ADD_USERS", payload: res.users });
-  //       });
-  //     }
-  //   } else {
-  //     dispatch({ type: "ADD_ORDERS", payload: [] });
-  //     dispatch({ type: "ADD_USERS", payload: [] });
-  //   }
-  // }, [auth.token]);
+          dispatch({ type: "ADD_USERS", payload: res.users });
+        });
+      }
+    } else {
+      dispatch({ type: "ADD_ORDERS", payload: [] });
+      dispatch({ type: "ADD_USERS", payload: [] });
+    }
+  }, [auth.token]);
 
   return (
     <DataContext.Provider value={{ state, dispatch }}>
