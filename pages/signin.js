@@ -2,9 +2,8 @@ import Head from "next/head";
 import Link from "next/link";
 import { useState, useContext, useEffect } from "react";
 import { DataContext } from "../store/GlobalState";
-import { postData, signin } from "../utils/fetchData";
+import { signin } from "../utils/fetchData";
 import { useRouter } from "next/router";
-import Cookie from "js-cookie";
 
 import { authenticate, isAuth } from "../actions/auth";
 const Signin = () => {
@@ -37,14 +36,20 @@ const Signin = () => {
       payload: { token: res.access_token, user: res.user },
     });
 
-    // console.log(res);
     authenticate(res);
+    dispatch({
+      type: "AUTH",
+      payload: {
+        token: res.access_token,
+        user: res.user,
+      },
+    });
     router.push(`/`);
   };
 
-  // useEffect(() => {
-  //   if (Object.keys(auth).length !== 0) router.push("/");
-  // }, [auth]);
+  useEffect(() => {
+    if (Object.keys(auth).length !== 0) router.push("/");
+  }, [auth]);
 
   return (
     <div>

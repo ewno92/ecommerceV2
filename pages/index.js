@@ -11,22 +11,23 @@ export default function Home(props) {
   // console.log(props.result);
 
   return (
-    <div className="container">
+    <div className="home_page">
       <Head>
         <title>Home Page</title>
       </Head>
-      <div className="row">
-        <div className="col">
-          <div className="d-flex flex-wrap">
-            {products.length === 0 ? (
-              <h2>No Products</h2>
-            ) : (
-              products.map((product) => (
-                <ProductItem key={product._id} product={product} />
-              ))
-            )}
-          </div>
-        </div>
+
+      <div className="products">
+        {products.length === 0 ? (
+          <h2>No Products</h2>
+        ) : (
+          products.map((product) => (
+            <ProductItem
+              key={product._id}
+              product={product}
+              // handleCheck={handleCheck}
+            />
+          ))
+        )}
       </div>
     </div>
   );
