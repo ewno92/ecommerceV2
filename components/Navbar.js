@@ -10,6 +10,7 @@ import link from "next/link";
 const Navbar = () => {
   const router = useRouter();
   const { state, dispatch } = useContext(DataContext);
+  const { auth, cart } = state;
 
   const handleLogout = () => {
     Cookie.remove("refreshtoken", { path: "api/auth/accessToken" });
@@ -17,7 +18,7 @@ const Navbar = () => {
     localStorage.removeItem("user");
     dispatch({ type: "AUTH", payload: {} });
     dispatch({ type: "NOTIFY", payload: { success: "Logged out!" } });
-    // return router.push("/");
+    return router.push("/");
   };
 
   return (
@@ -72,6 +73,32 @@ const Navbar = () => {
               <a className="nav-link" href="#">
                 Pricing
               </a>
+            </li>
+            <li className="nav-item">
+              <Link href="/cart">
+                <a className="nav-link " aria-current="page">
+                  <i
+                    className="fas fa-shopping-cart position-relative"
+                    aria-hidden="true"
+                  >
+                    <span
+                      className="position-absolute"
+                      style={{
+                        padding: "3px 6px",
+                        background: "#ed143dc2",
+                        borderRadius: "50%",
+                        top: "-10px",
+                        right: "-10px",
+                        color: "white",
+                        fontSize: "14px",
+                      }}
+                    >
+                      {cart.length}
+                    </span>
+                  </i>
+                  Cart
+                </a>
+              </Link>
             </li>
             {/* <li className="nav-item">
               <a className="nav-link ">Disabled</a>

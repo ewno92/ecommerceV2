@@ -8,7 +8,7 @@ export const DataProvider = ({ children }) => {
   const initialState = {
     notify: {},
     auth: {},
-    // cart: [],
+    cart: [],
     // modal: [],
     // orders: [],
     // users: [],
