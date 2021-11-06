@@ -28,12 +28,13 @@ export const getData = async (url, token) => {
 //   return data;
 // };
 
-export const postData = async (url, post) => {
+export const postData = async (url, post, token) => {
   // const res = await fetch(`${baseUrl}/api/${url}`, {
   const res = await fetch(`${baseUrl}/api/${url}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: token,
     },
     body: JSON.stringify(post),
   });
