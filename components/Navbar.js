@@ -70,9 +70,11 @@ const Navbar = () => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                Pricing
-              </a>
+              <Link href="/profile">
+                <a className="nav-link" href="#">
+                  Profile
+                </a>
+              </Link>
             </li>
             <li className="nav-item">
               <Link href="/cart">
