@@ -31,17 +31,22 @@ const getUsers = async (req, res) => {
 const uploadInfor = async (req, res) => {
   try {
     const result = await auth(req, res);
-    const { name, password } = req.body;
+    const { password } = req.body;
 
-    const newUser = await Users.findOneAndUpdate({ _id: result.id });
+    Users.findById({ _id: result._id }, (err, user) => {
+      if (err) return false;
+      user.password = password;
+      user.save();
+    });
 
     res.json({
       msg: "Update Success!",
-      user: {
-        name,
-        email: newUser.email,
-        role: newUser.role,
-      },
+      //   user: {
+      //     name,
+      //     avatar,
+      //     email: newUser.email,
+      //     role: newUser.role,
+      //   },
     });
   } catch (err) {
     return res.status(500).json({ err: err.message });
