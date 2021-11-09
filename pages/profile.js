@@ -60,6 +60,7 @@ const Profile = () => {
     dispatch({
       type: "AUTH",
       payload: {
+        token: auth.token,
         user: name,
       },
     });
