@@ -64,11 +64,11 @@ const Navbar = () => {
               </li>
             )}
 
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <a className="nav-link" href="/home">
                 Features
               </a>
-            </li>
+            </li> */}
             <li className="nav-item">
               <Link href="/profile">
                 <a className="nav-link" href="#">
