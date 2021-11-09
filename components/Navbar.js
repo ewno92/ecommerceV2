@@ -86,13 +86,14 @@ const Navbar = () => {
                     <span
                       className="position-absolute"
                       style={{
-                        padding: "3px 6px",
-                        background: "#ed143dc2",
+                        padding: "3px 5px",
+                        background: "black",
                         borderRadius: "50%",
-                        top: "-10px",
-                        right: "-10px",
+                        top: " -10px",
+                        right: "-55px",
                         color: "white",
-                        fontSize: "14px",
+                        fontSize: "12px",
+                        fontWeight: "bold",
                       }}
                     >
                       {cart.length}
