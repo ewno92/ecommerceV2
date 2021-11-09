@@ -26,12 +26,6 @@ const userSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
     },
-    profile: {
-      type: String,
-      default:
-        "https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png",
-      required: true,
-    },
     hashed_password: {
       type: String,
       required: true,

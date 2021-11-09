@@ -47,6 +47,24 @@ const Profile = () => {
     });
   };
 
+  const handleUpdateName = (e) => {
+    e.preventDefault();
+    dispatch({ type: "NOTIFY", payload: { loading: true } });
+    console.log("update name");
+    console.log(name);
+    patchData("user/", { name }, auth.token).then((res) => {
+      if (res.err)
+        return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+      return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+    });
+    dispatch({
+      type: "AUTH",
+      payload: {
+        user: name,
+      },
+    });
+  };
+
   if (!auth.user) return null;
 
   return (
@@ -60,7 +78,7 @@ const Profile = () => {
             {auth.user.role === "user" ? "User Profile" : "Admin Profile"}
           </h3>
 
-          <div className="form-group">
+          <form className="form-group">
             <label htmlFor="name">Name</label>
             <input
               type="text"
@@ -70,7 +88,14 @@ const Profile = () => {
               placeholder="Your name"
               onChange={handleChange}
             />
-          </div>
+            <button
+              className="btn btn-dark my-3"
+              disabled={notify.loading}
+              onClick={handleUpdateName}
+            >
+              Update Name
+            </button>
+          </form>
 
           <div className="form-group">
             <label htmlFor="email">Email</label>
@@ -83,37 +108,38 @@ const Profile = () => {
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="password">New Password</label>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              className="form-control"
-              placeholder="Your new password"
-              onChange={handleChange}
-            />
-          </div>
+          <form>
+            <div className="form-group">
+              <label htmlFor="password">New Password</label>
+              <input
+                type="password"
+                name="password"
+                value={password}
+                className="form-control"
+                placeholder="Your new password"
+                onChange={handleChange}
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="cf_password">Confirm New Password</label>
-            <input
-              type="password"
-              name="cf_password"
-              value={cf_password}
-              className="form-control"
-              placeholder="Confirm new password"
-              onChange={handleChange}
-            />
-          </div>
-
-          <button
-            className="btn btn-dark my-3"
-            disabled={notify.loading}
-            onClick={handleUpdateProfile}
-          >
-            Update
-          </button>
+            <div className="form-group">
+              <label htmlFor="cf_password">Confirm New Password</label>
+              <input
+                type="password"
+                name="cf_password"
+                value={cf_password}
+                className="form-control"
+                placeholder="Confirm new password"
+                onChange={handleChange}
+              />
+            </div>
+            <button
+              className="btn btn-dark my-3"
+              disabled={notify.loading}
+              onClick={handleUpdateProfile}
+            >
+              Update Password
+            </button>
+          </form>
         </div>
 
         <div className="col-md-8">

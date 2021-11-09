@@ -30,24 +30,38 @@ const getUsers = async (req, res) => {
 
 const uploadInfor = async (req, res) => {
   try {
+    console.log("body@@@@@@@@@@@@: ", req.body);
     const result = await auth(req, res);
-    const { password } = req.body;
+    if (req.body.name) {
+      const { name } = req.body;
+      const newUser = Users.findById({ _id: result._id }, (err, user) => {
+        if (err)
+          return res.status(500).json({
+            err: `Server Error`,
+          });
+        user.name = name;
+        user.save();
+      });
+      res.json({
+        msg: "Name Update Success!",
+      });
+    }
 
-    Users.findById({ _id: result._id }, (err, user) => {
-      if (err) return false;
-      user.password = password;
-      user.save();
-    });
-
-    res.json({
-      msg: "Update Success!",
-      //   user: {
-      //     name,
-      //     avatar,
-      //     email: newUser.email,
-      //     role: newUser.role,
-      //   },
-    });
+    if (req.body.password) {
+      const { password } = req.body;
+      const newUser = Users.findById({ _id: result._id }, (err, user) => {
+        if (err)
+          return res.status(500).json({
+            err: `Server Error`,
+          });
+        user.password = password;
+        user.save();
+      });
+      const user = await auth(req, res);
+      res.json({
+        msg: "Password Update Success!",
+      });
+    }
   } catch (err) {
     return res.status(500).json({ err: err.message });
   }
