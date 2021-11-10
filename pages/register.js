@@ -110,7 +110,7 @@ const Register = () => {
             onChange={handleChangeInput}
           />
           <Form.Text className="text-muted">
-            We'll never share your information with anyone else.
+            We&apos;ll never share your information with anyone else.
           </Form.Text>
         </Form.Group>
 
