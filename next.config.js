@@ -10,12 +10,4 @@ module.exports = {
     SANDBOX_CLIENT_ID: process.env.SANDBOX_CLIENT_ID,
     SANDBOX_CLIENT_SECRET: process.env.SANDBOX_CLIENT_SECRET,
   },
-  async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination: "https://ecommerce-orpin-seven.vercel.app/:path*",
-      },
-    ];
-  },
 };
