@@ -1,3 +1,15 @@
+Live Web on
+https://ecommerce-orpin-seven.vercel.app/
+
+User Authentication fully working including register, signin, change password, and change name.
+
+On Profile page when you signin, you can change name and password.
+
+Cart data will saved to localStorage. So when customers exit the web and come back, the cart will not be empty.
+Before checkout, cart page will fetch stock data so that customers will not be able to order more than in stock.
+
+After successful paypal payment, the stock for item will decrease automatically.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
