@@ -1,6 +1,14 @@
 Live Web on
 https://ecommerce-orpin-seven.vercel.app/
 
+user
+id: user@gmail.com
+pw: fdsjkl
+
+admin
+id: admin@gmail.com
+pw: fdsjkl
+
 User Authentication fully working including register, signin, change password, and change name.
 
 On Profile page when you signin, you can change name and password.

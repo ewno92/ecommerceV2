@@ -148,7 +148,7 @@ const Profile = () => {
 
           <div className="my-3 table-responsive">
             <table
-              className="table-bordered table-hover w-100 text-uppercase"
+              className="table table-hover  text-uppercase"
               style={{ minWidth: "600px", cursor: "pointer" }}
             >
               <thead className="bg-light font-weight-bold">
@@ -157,7 +157,7 @@ const Profile = () => {
                   <td className="p-2">date</td>
                   <td className="p-2">total</td>
                   <td className="p-2">delivered</td>
-                  <td className="p-2">Action</td>
+                  <td className="p-2">paid</td>
                 </tr>
               </thead>
 
