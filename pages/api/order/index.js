@@ -24,10 +24,7 @@ const getOrders = async (req, res) => {
 
     let orders;
     if (result.role == "0") {
-      orders = await Orders.find({ user: result.id }).populate(
-        "user",
-        "-password"
-      );
+      orders = await Orders.find({ user: result.id });
     } else if (result.role == "1") {
       orders = await Orders.find();
     }
