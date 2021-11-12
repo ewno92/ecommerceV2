@@ -8,7 +8,6 @@ const OrderDetail = ({ orderDetail, state, dispatch }) => {
 
   const handleDelivered = (order) => {
     dispatch({ type: "NOTIFY", payload: { loading: true } });
-
     patchData(`order/delivered/${order._id}`, null, auth.token).then((res) => {
       if (res.err)
         return dispatch({ type: "NOTIFY", payload: { error: res.err } });
