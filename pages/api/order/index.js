@@ -20,17 +20,22 @@ const getOrders = async (req, res) => {
   try {
     const result = await auth(req, res);
 
+    console.log(result);
+
     let orders;
-    if (result.role !== "admin") {
+    if (result.role == "0") {
       orders = await Orders.find({ user: result.id }).populate(
         "user",
         "-password"
       );
-    } else {
-      orders = await Orders.find().populate("user", "-password");
+    } else if (result.role == "1") {
+      orders = await Orders.find();
     }
 
-    res.json({ orders });
+    console.log("orders: ", orders);
+    res.json({
+      orders: orders.reverse(),
+    });
   } catch (err) {
     return res.status(500).json({ err: err.message });
   }

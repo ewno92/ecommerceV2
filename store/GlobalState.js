@@ -49,6 +49,7 @@ export const DataProvider = ({ children }) => {
     const __next__cart01 = JSON.parse(localStorage.getItem("__next__cart01"));
     if (__next__cart01) dispatch({ type: "ADD_CART", payload: __next__cart01 });
   }, []);
+
   useEffect(() => {
     localStorage.setItem("__next__cart01", JSON.stringify(cart));
   }, [cart]);
@@ -62,7 +63,7 @@ export const DataProvider = ({ children }) => {
         dispatch({ type: "ADD_ORDERS", payload: res.orders });
       });
 
-      if (auth.user.role === "admin") {
+      if (auth.user.role === "1") {
         getData("user", auth.token).then((res) => {
           if (res.err)
             return dispatch({ type: "NOTIFY", payload: { error: res.err } });
