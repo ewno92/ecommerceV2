@@ -20,6 +20,7 @@ const Navbar = () => {
 
   useEffect(() => {
     console.log(Object.keys(auth).length);
+    console.log(auth);
   }, [auth]);
 
   return (
@@ -79,6 +80,7 @@ const Navbar = () => {
                 </Link>
               </li>
             )}
+
             <li className="nav-item">
               <Link href="/cart">
                 <a className="nav-link " aria-current="page">

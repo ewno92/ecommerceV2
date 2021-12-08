@@ -24,7 +24,7 @@ export const addToCart = (product, cart) => {
   if (!check)
     return {
       type: "NOTIFY",
-      payload: { error: "The product has been added to cart." },
+      payload: { error: "The product is already in cart." },
     };
   return { type: "ADD_CART", payload: [...cart, { ...product, quantity: 1 }] };
 };
