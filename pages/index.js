@@ -1,17 +1,22 @@
 // import { isAuth } from "../utils/fetchData";
 import { getData } from "../utils/fetchData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import ProductItem from "../components/product/ProductItem";
-
+import Aos from "aos";
+import "aos/dist/aos.css";
 export default function Home(props) {
   const [products, setProducts] = useState(props.products);
 
   // console.log(products);
   // console.log(props.result);
 
+  useEffect(() => {
+    Aos.init({ duration: 1500 });
+  }, []);
+
   return (
-    <div className="home_page">
+    <div className="home_page mb-5">
       <Head>
         <title>Home Page</title>
       </Head>
@@ -21,11 +26,13 @@ export default function Home(props) {
           <h2>No Products</h2>
         ) : (
           products.map((product) => (
-            <ProductItem
-              key={product._id}
-              product={product}
-              // handleCheck={handleCheck}
-            />
+            <div data-aos="fade-up" key={product._id}>
+              <ProductItem
+                // key={product._id}
+                product={product}
+                // handleCheck={handleCheck}
+              />
+            </div>
           ))
         )}
       </div>

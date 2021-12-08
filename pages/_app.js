@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Layout from "../components/Layout";
 import { DataProvider } from "../store/GlobalState";
 import { SSRProvider } from "@react-aria/ssr";
-
+import "aos/dist/aos.css";
 function MyApp({ Component, pageProps }) {
   return (
     <SSRProvider>
