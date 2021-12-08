@@ -9,7 +9,7 @@ const Toast = ({ msg, handleShow }) => {
     >
       <div className="toast-header">
         <strong className="me-auto">{msg.title}</strong>
-        <small>X mins ago</small>
+        {/* <small>X mins ago</small> */}
         <button
           type="button"
           className="btn-close"
